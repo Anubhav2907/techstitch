@@ -1,0 +1,58 @@
+program largestfinderProgram;
+
+#include("stdlib.hhf");
+
+procedure largestfinder( x: int16; y: int16; z: int16 ); @nodisplay; @noframe;
+begin largestfinder;
+
+    push( bx );
+    push( cx );
+
+    mov( x, bx );  
+    mov( y, cx );  
+
+    cmp( bx, cx );
+    jge Lx_ge_y;  
+
+    mov( cx, bx ); 
+
+Lx_ge_y:
+    mov( z, cx );  
+
+    cmp( bx, cx );
+    jge Lend;      
+    mov( cx, bx ); 
+
+Lend:
+    mov( bx, ax ); 
+
+    pop( cx );
+    pop( bx );
+
+end largestfinder;
+
+begin largestfinderProgram;
+
+    var
+        a: int16;
+        b: int16;
+        c: int16;
+
+    stdout.put( "Feed Me X: " );
+    stdin.get( a );
+
+    stdout.put( "Feed Me Y: " );
+    stdin.get( b );
+
+    stdout.put( "Feed Me Z: " );
+    stdin.get( c );
+
+    push( c );    
+    push( b );    
+    push( a );    
+    call largestfinder;
+    add( esp, 6 ); 
+
+    stdout.put( "AX = ", (type int16 ax), nl );
+
+end largestfinderProgram;

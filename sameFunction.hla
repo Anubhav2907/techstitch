@@ -1,0 +1,50 @@
+program CheckSame;
+#include("stdlib.hhf");
+
+procedure same(w: int16; x: int16; y: int16; z: int16); @nodisplay; @noframe;  
+begin same;
+    pop(EDX);          // Return Address
+    pop(z);
+    pop(y);
+    pop(x);
+    pop(w);
+    push(EDX);         // Return Address
+    mov(z, BX);
+    cmp(y, BX);        // Compare z & y
+    jne ReturnZero;
+    mov(y, BX);
+    cmp(x, BX);        // Compare y & x
+    jne ReturnZero;
+    mov(x, BX);
+    cmp(w, BX);        // Compare x & w
+    jne ReturnZero;
+    mov(1, AL);
+    jmp ExitSequence;
+    ReturnZero:
+        mov(0, AL);
+    ExitSequence:
+        ret();
+end same;
+
+begin CheckSame;
+    stdout.put("Feed Me W: ");
+    stdin.geti16();
+    push(AX);
+    stdout.put("Feed Me X: ");
+    stdin.geti16();
+    push(AX);
+    stdout.put("Feed Me Y: ");
+    stdin.geti16();
+    push(AX);
+    stdout.put("Feed Me Z: ");
+    stdin.geti16();
+    push(AX);
+    call same;
+    cmp(AL, 1);
+    jne NumbersAreDifferent;
+    stdout.put("Same. AL = 1");
+    jmp EndProgram;
+    NumbersAreDifferent:
+        stdout.put("Not the same. AL = 0");
+    EndProgram:
+end CheckSame;
