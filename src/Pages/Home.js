@@ -13,6 +13,9 @@ import Footer from "../Components/Common/Footer";
 function Home() {
   const location = useLocation();
   useEffect(() => {
+    document.title = "Techstitch | Home";
+  }, []);
+  useEffect(() => {
     if (location.state?.scrollTo) {
       setTimeout(() => {
         const section = document.getElementById(location.state.scrollTo);

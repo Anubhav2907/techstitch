@@ -98,7 +98,7 @@ const SecondSection = () => {
           </div>
           <span style={styles.rightHeading}>Your Security is Our Priority</span>
           <span style={styles.rightText}>
-            Started in 2020, TPL is known for delivering impeccable security
+            Started in 2021, TPL is known for delivering impeccable security
             solutions to all types of household and industrial challenges.
             Offering prompt installations, quick maintenance, and a hassle-free
             customer experience.

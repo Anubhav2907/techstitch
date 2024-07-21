@@ -188,10 +188,15 @@ const TnC = () => {
         contact us at:
       </p>
       <p style={styles.paragraphLast}>Techstitch Pvt. Ltd.</p>
-      <p style={styles.paragraphLast}>[Address]</p>
-      <p style={styles.paragraphLast}>[City, State, ZIP Code]</p>
-      <p style={styles.paragraphLast}>[Email Address]</p>
-      <p style={styles.paragraphLast}>[Phone Number]</p>
+      <p style={styles.paragraphLast}>E-28B, Jagdamba Colony</p>
+      <p style={styles.paragraphLast}>Naya Khera, Vidhyadhar Nagar,</p>
+      <p style={styles.paragraphLast}>Jaipur, Rajasthan, 302039</p>
+      <p style={styles.paragraphLast}>
+        {" "}
+        admin@techstitch.co.in, sales@techstitch.co.in
+      </p>
+
+      <p style={styles.paragraphLast}>+91 8619952932</p>
     </div>
   );
 };

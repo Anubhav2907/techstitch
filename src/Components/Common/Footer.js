@@ -4,15 +4,22 @@ import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import TnC from "./TnC";
 import Privacy from "./Privacy";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../../Utils/firebaseConfig";
+import { v4 as uuidv4 } from "uuid";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const Footer = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [openTnc, setOpenTnc] = useState(false);
   const [openPrivacy, setOpenPrivacy] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
@@ -20,6 +27,7 @@ const Footer = () => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
   const handleOpenTnc = async () => {
     setOpenTnc(true);
   };
@@ -29,6 +37,26 @@ const Footer = () => {
     setOpenPrivacy(true);
   };
   const handleClosePrivacy = () => setOpenPrivacy(false);
+  const handleClose = () => setOpen(false);
+
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+  };
+
+  const handleSubscribeClick = async () => {
+    if (/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(email)) {
+      setEmailError(false);
+    } else {
+      setEmailError(true);
+      return;
+    }
+    setOpen(true);
+    setLoading(true);
+    await setDoc(doc(db, "newsletter", uuidv4()), {
+      email: email,
+    });
+    setLoading(false);
+  };
 
   const isMobile = windowWidth <= 767;
   const styles = {
@@ -95,6 +123,21 @@ const Footer = () => {
       p: 4,
       ...(isMobile ? { maxWidth: "95%" } : {}),
     },
+    popup2: {
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
+      // width: "80%",
+      bgcolor: "background.paper",
+      boxShadow: 24,
+      borderRadius: "20px",
+      // height: "90%",
+      overflow: "auto",
+      textAlign: "center",
+      p: 4,
+      ...(isMobile ? { maxWidth: "95%" } : {}),
+    },
     option: {
       paddingRight: "2em",
     },
@@ -140,6 +183,10 @@ const Footer = () => {
       fontSize: "1.2em",
       ...(isMobile ? { paddingTop: "1em", fontSize: "1em" } : {}),
     },
+    errorText: {
+      color: "red",
+      fontSize: "0.8em",
+    },
   };
   return (
     <div
@@ -160,7 +207,7 @@ const Footer = () => {
           </div>
           <div style={styles.footerOptions}>
             Techstitch Pvt. Ltd., leading the way, highly trusted <br />
-            and reliable security and surveillance partner since 2020.
+            and reliable security and surveillance partner since 2021.
           </div>
         </div>
         <div style={styles.rightContainer}>
@@ -174,9 +221,18 @@ const Footer = () => {
                 variant="outlined"
                 size="small"
                 sx={{ border: "0" }}
+                value={email}
+                onChange={handleEmailChange}
               />
-              <Button variant="contained">SUBSCRIBE</Button>
+              <Button variant="contained" onClick={handleSubscribeClick}>
+                SUBSCRIBE
+              </Button>
             </div>
+            {emailError && (
+              <span style={styles.errorText}>
+                * &nbsp;Please Enter a Valid Email
+              </span>
+            )}
           </div>
         </div>
       </div>
@@ -218,6 +274,27 @@ const Footer = () => {
       >
         <Box sx={styles.popup}>
           <Privacy />
+        </Box>
+      </Modal>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={styles.popup2}>
+          {loading ? (
+            <CircularProgress />
+          ) : (
+            <>
+              <CheckCircleIcon
+                color="primary"
+                fontSize="30px"
+                sx={{ fontSize: "40px" }}
+              />{" "}
+              <p>Subscribed Successfully</p>
+            </>
+          )}
         </Box>
       </Modal>
     </div>

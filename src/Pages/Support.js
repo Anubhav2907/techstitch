@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "../Components/Common/Navbar";
 import FirstSection from "../Components/SupportPage/FirstSection";
 import Tickets from "../Components/SupportPage/Tickets";
@@ -7,6 +7,9 @@ import StartService from "../Components/SupportPage/StartService";
 import Footer from "../Components/Common/Footer";
 
 function Service() {
+  useEffect(() => {
+    document.title = "Techstitch | Support";
+  }, []);
   return (
     <>
       <Navbar></Navbar>

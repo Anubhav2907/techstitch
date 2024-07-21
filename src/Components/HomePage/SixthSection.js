@@ -289,7 +289,7 @@ const SixthSection = () => {
       </div>
       <div style={styles.imgContainer}>
         <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6405.70016483211!2d77.73562621842676!3d12.982988030318449!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae11fa1fd42325%3A0x31bb986f65cdfa1b!2sFOYER%20INFINITY%2C%20Pattandur%20Agrahara%2C%20Whitefield%2C%20Bengaluru%2C%20Karnataka%20560066!5e0!3m2!1sen!2sin!4v1718405469295!5m2!1sen!2sin"
+          src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3556.503857649073!2d75.77850707632786!3d26.950938976624364!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjbCsDU3JzAzLjQiTiA3NcKwNDYnNTEuOSJF!5e0!3m2!1sen!2sin!4v1721590562263!5m2!1sen!2sin"
           width="100%"
           height="100%"
           style={{ border: 0 }}

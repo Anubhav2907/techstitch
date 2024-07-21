@@ -113,7 +113,8 @@ const CreateTicket = () => {
     } else {
       setNameError(false);
     }
-    if (!phone) {
+    const phoneRegex = /^\d{10}$/;
+    if (!phone || !phoneRegex.test(phone)) {
       setPhoneError(true);
       isValid = false;
     } else {
@@ -210,7 +211,9 @@ const CreateTicket = () => {
                 onChange={(e) => setPhone(e.target.value)}
               />
               {phoneError && (
-                <span style={styles.errorText}>* &nbsp;Phone is required</span>
+                <span style={styles.errorText}>
+                  * &nbsp;Valid 10-digit phone number is required
+                </span>
               )}
             </div>
           </div>
